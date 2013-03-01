@@ -401,7 +401,12 @@ Located in [[file:starter-kit-org.org][starter-kit-org]].
 #+begin_src emacs-lisp
 (starter-kit-load "starter-kit-org.org")
 #+end_src
+*** Starter kit Org-mode GTD
+Located in [[starter-kit-gtd.org][starter-kit-gtd]]
 
+#+begin_src emacs-lisp
+(starter-kit-load "starter-kit-gtd.org")
+#+end_src
 *** Starter kit eshell
 Located in [[file:starter-kit-eshell.org][starter-kit-eshell]]
 
