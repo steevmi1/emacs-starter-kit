@@ -12,21 +12,28 @@
 (setq dotfiles-dir (file-name-directory (or load-file-name (buffer-file-name))))
 
 
-(add-to-list 'load-path (expand-file-name
-                         "lisp" (expand-file-name
-                                 "org" (expand-file-name
-                                        "src" dotfiles-dir))))
+;;(add-to-list 'load-path (expand-file-name
+;;                         "lisp" (expand-file-name
+;;                                 "org" (expand-file-name
+;;                                        "src" dotfiles-dir))))
 
 ;; Package Locations
 ;; Location of various local packages (in .emacs.d/vendor or .emacs.d/src)
 ;;  because I don't want to keep them in =/Applications/Emacs.app/= or in
 ;;  =/usr/share/local/=.
 
-(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-    (let* ((my-lisp-dir "~/.emacs.d/")
-           (default-directory my-lisp-dir))
-      (setq load-path (cons my-lisp-dir load-path))
-      (normal-top-level-add-subdirs-to-load-path)))
+;;(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+;;    (let* ((my-lisp-dir "~/.emacs.d/")
+;;           (default-directory my-lisp-dir))
+;;      (setq load-path (cons my-lisp-dir load-path))
+;;      (normal-top-level-add-subdirs-to-load-path)))
+
+(let* ((my-lisp-dir "~/.emacs.d/")
+       (default-directory my-lisp-dir)
+       (orig-load-path load-path))
+  (setq load-path (cons my-lisp-dir nil))
+  (normal-top-level-add-subdirs-to-load-path)
+  (nconc load-path orig-load-path))
 
 ;; Font-face setup. Check the availability of a some default fonts, in
 ;; order of preference. The first of these alternatives to be found is

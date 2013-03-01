@@ -20,10 +20,10 @@ The following packages will be downloaded and installed.
                                 'expand-region
                                 'gist
                                 'hl-line+
-                                'idle-highlight
+                                'idle-highlight-mode
                                 'inf-ruby
                                 'latex-pretty-symbols
-                                'mac-key-mode
+;;                                'mac-key-mode
                                 'magit
                                 'markdown-mode
                                 'maxframe
@@ -37,10 +37,10 @@ The following packages will be downloaded and installed.
                                 'solarized-theme
                                 'tango-2-theme
                                 'textmate
-                                'typopunct
+;;                                'typopunct
                                 'yaml-mode
                                 'yasnippet
-                                'r-autoyas
+;;                                'r-autoyas
                                 'zenburn-theme
                                 'auctex
                                 'ess
