@@ -268,7 +268,7 @@ since they are likely to be used in every session
   (defun starter-kit-compile (&optional arg)
     "Tangle and Byte compile all starter-kit files."
     (interactive "P")
-    (flet ((age (file)
+    (cl-flet ((age (file)
                 (float-time
                  (time-subtract (current-time)
                                 (nth 5 (or (file-attributes (file-truename file))
@@ -290,7 +290,7 @@ since they are likely to be used in every session
                (list (concat dotfiles-dir user-login-name) dotfiles-dir))))))
 #+end_src
 
-*** Starter Kit aspell
+*** Starter Kit aspell (Spell checking with flyspell)
 aspell workaround in [[file:starter-kit-aspell.org][starter-kit-aspell]]
 #+begin_src emacs-lisp
   (starter-kit-load "starter-kit-aspell.org")
@@ -305,7 +305,21 @@ Load up [[http://tromey.com/elpa/][ELPA]], the Emacs Lisp package manager.
   (setq package-archives
         '(("gnu"         . "http://elpa.gnu.org/packages/")
           ("org"         . "http://orgmode.org/elpa/")
-          ("melpa"   . "http://melpa.milkbox.net/packages/")))
+          ("melpa"   . "http://melpa.milkbox.net/packages/")
+          ("marmalade" . "http://marmalade-repo.org/packages/")))
+
+(defvar melpa-exclude-packages
+  '(slime)
+  "Don't install Melpa versions of these packages.")
+
+;; Don't take Melpa versions of certain packages
+(setq package-filter-function
+      (lambda (package version archive)
+        (and
+         (not (memq package '(eieio)))
+         (or (not (string-equal archive "melpa"))
+             (not (memq package melpa-exclude-packages))))))
+
   (package-initialize)
   (starter-kit-load "starter-kit-elpa.org")
 #+end_src
@@ -495,7 +509,6 @@ After we've loaded all the Starter Kit defaults, lets load the User's stuff.
       (mapc #'load (directory-files user-specific-dir nil ".*el$"))
       (mapc #'org-babel-load-file (directory-files user-specific-dir nil ".*org$"))))
 #+end_src
-
 
 * FAQ
   :PROPERTIES:
