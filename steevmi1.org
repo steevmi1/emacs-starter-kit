@@ -393,7 +393,7 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
                        pdflatex, or xelatex as appropriate, using latexmk."
       (let ((texcmd)))
       ;; default command: pdflatex 
-      (setq texcmd "latexmk -pdflatex='pdflatex -synctex=1 --shell-escape --' -pdf %f")        
+      (setq texcmd "latexmk -pdflatex='pdflatex -synctex=1 --shell-escape' -pdf %f")        
       ;; pdflatex -> .pdf
       (if (string-match "LATEX_CMD: pdflatex" (buffer-string))
           (setq texcmd "latexmk -pdflatex='pdflatex -synctex=1 --shell-escape' -pdf %f"))
