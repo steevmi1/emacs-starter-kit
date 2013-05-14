@@ -202,3 +202,20 @@ This is turned off, as the color theme handles it.
        (set-face-foreground 'magit-diff-del "red3")))
 
 #+end_src
+
+** magit
+Start to customize magit some.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun oni:magit-log-edit-mode-func ()
+  "Function for `magit-log-edit-mode-hook'."
+  (auto-fill-mode)
+  (set-fill-column 72)
+  (flyspell-mode))
+
+(add-hook 'magit-log-edit-mode-hook 'oni:magit-log-edit-mode-func)
+(add-hook 'magit-log-edit-mode-hook 'turn-on-orgstruct)
+(add-hook 'magit-log-edit-mode-hook 'turn-on-orgstruct++)
+#+END_SRC
+
+[2013-05-14 Tue 10:27]
