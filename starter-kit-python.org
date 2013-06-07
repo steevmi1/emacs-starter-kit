@@ -28,7 +28,7 @@ supplied by the Python distribution itself.
    python-shell-completion-string-code
      "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
     
-    
+  (setq org-babel-python-mode 'python-mode)    
     
 #+end_src
 
