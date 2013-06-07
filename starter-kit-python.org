@@ -32,6 +32,12 @@ supplied by the Python distribution itself.
     
 #+end_src
 
+** Ipython
+Settings around configuring ipython, and ipython notebooks.
+
+#+BEGIN_SRC emacs-lisp
+(require 'ein)
+#+END_SRC
 ** Jedi documentation browser and auto-completion
 If you use the Jedi auto-completion method, change the =:tangle= flag below to =yes=. It's turned off by default because this is a plugin to a documentation system you have to install separately. See [[https://github.com/davidhalter/jedi][The Jedi Homepage]] for details.
 
