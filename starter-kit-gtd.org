@@ -3131,6 +3131,34 @@ sentence.
     "#+end_src\n")
   
   (define-abbrev org-mode-abbrev-table "selisp" "" 'skel-org-block-elisp)
+  
+  ;;  Added this 11 June 2013, from http://kangtu.me/~kangtu/pavilion.html
+  (define-skeleton org-r-codeblock-skeleton
+  "R code block for a emacs-org file."
+  "Name: "
+  "#+name: " str "\n"
+  "#+ATTR_LaTeX: width=10cm\n"
+  "#+begin_src R :session *R* :cache yes :exports both :file test.png :results output graphics :width 800 :height 480\n\n"
+  "#+end_src\n"
+)
+(define-abbrev org-mode-abbrev-table "rblk" "" 'org-r-codeblock-skeleton)
+
+;; define beamer header
+(define-skeleton org-beamer-header-skeleton
+  "Beamer header for a emacs-org file."
+  "Beamer header: "
+  "#+BEAMER_FRAME_LEVEL: 2\n"
+  "#+startup: beamer\n"
+  "#+LaTeX_CLASS: beamer\n"
+  "#+LaTeX_CLASS_OPTIONS: [t,10pt,svgnames,compress,red,subsection=false,xcolor=pdftex,dvipsnames,table]\n"
+  "#+latex_header: \\usepackage{xcolor} \n"
+  "#+latex_header: \\usepackage{fancyvrb} %\\beamertemplatenavigationsymbolsempty\n"
+  "#+latex_header: \\mode<beamer> {\\usetheme{Warsaw}}\n\n"
+  "#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)\n\n"
+)
+(define-abbrev org-mode-abbrev-table "bmrblk" "" 'org-beamer-header-skeleton)
+
+  
 #+end_src
 
 I also use abbrev-mode when taking notes at work.  I tend to write
