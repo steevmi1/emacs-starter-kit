@@ -29,7 +29,7 @@ load it manually with =M-x load-theme solarized-light=.
   (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa")
   (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
   (setq custom-safe-themes t)
-  (load-theme 'solarized-light t)
+  (load-theme 'ir-black t)
 #+end_src
 
 ** Window system 
