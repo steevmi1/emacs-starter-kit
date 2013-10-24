@@ -40,12 +40,20 @@ load it manually with =M-x load-theme solarized-light=.
     (setq frame-title-format '(buffer-file-name "%f" ("%b")))
     (tooltip-mode -1)
     (tool-bar-mode -1)
-    (blink-cursor-mode -1))
+    (blink-cursor-mode -1)
+    (scroll-bar-mode -1))
   
   (mouse-wheel-mode t)
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
+  
+  (when (window-system)
+    (require 'git-gutter-fringe))
+  
+  (global-git-gutter-mode +1)
+  (setq-default indicate-buffer-boundaries 'left)
+  (setq-default indicate-empty-lines +1)
   
   (setq visible-bell t
         echo-keystrokes 0.1
@@ -53,7 +61,7 @@ load it manually with =M-x load-theme solarized-light=.
         font-lock-verbose nil
         inhibit-startup-message t
         transient-mark-mode t
-      ;;  color-theme-is-global t
+        ;;  color-theme-is-global t
         delete-by-moving-to-trash t
         shift-select-mode nil
         truncate-partial-width-windows nil
@@ -219,3 +227,14 @@ Start to customize magit some.
 #+END_SRC
 
 [2013-05-14 Tue 10:27]
+** Scrolling behavior
+Make scrolling a bit better when using keyboard to move around.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq redisplay-dont-pause t
+      scroll-margin 1
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
+#+END_SRC
+[2013-10-24 Thu 14:50]

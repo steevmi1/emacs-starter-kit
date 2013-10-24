@@ -19,6 +19,7 @@ The following packages will be downloaded and installed.
                                 'exec-path-from-shell
                                 'expand-region
                                 ;; 'gist
+                                'git-gutter-fringe
                                 'hl-line+
                                 ;; 'idle-highlight
                                 'inf-ruby
@@ -48,7 +49,7 @@ The following packages will be downloaded and installed.
                                 'ess
                                 'r-autoyas
                                 'ein
-                                'ir-black
+                                'ir-black-theme
                                 'underwater-theme
                                 )
     "Libraries that should be installed by default.")
