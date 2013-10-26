@@ -48,8 +48,8 @@ load it manually with =M-x load-theme solarized-light=.
   (set-keyboard-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
   
-;;  (when (window-system)
-;;    (require 'git-gutter-fringe))
+  (when (window-system)
+    (require 'git-gutter-fringe))
   
   (global-git-gutter-mode +1)
   (setq-default indicate-buffer-boundaries 'left)
@@ -230,7 +230,7 @@ Start to customize magit some.
 ** Scrolling behavior
 Make scrolling a bit better when using keyboard to move around.
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp :tangle yes
 (setq redisplay-dont-pause t
       scroll-margin 1
       scroll-step 1
