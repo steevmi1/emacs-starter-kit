@@ -320,17 +320,17 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
    Sync orgmode files with Dropbox and iPhone. 
 #+src-name: orgmode-mobile
 #+begin_src emacs-lisp
-     ;; Set to the location of your Org files on your local system
-     (setq org-directory "~/Library/org-mode")
-     ;; Set to <your Dropbox root directory>/MobileOrg.
-     ;;(setq org-mobile-directory "~/Dropbox/MobileOrg")
-     ;; Set to the files (or directory of files) you want sync'd
-     (setq org-agenda-files (quote ("~/Library/org-mode"
-                                    "~/Documents/Novartis/2013/NIBR-2013.org")))
-     ;; Set to the name of the file where new notes will be stored
-     ;;(setq org-mobile-inbox-for-pull "~/Library/org-mode/from-mobile.org")
-     
+  ;; Set to the location of your Org files on your local system
+  (setq org-directory "~/Library/org-mode")
+  ;; Set to <your Dropbox root directory>/MobileOrg.
+  ;;(setq org-mobile-directory "~/Dropbox/MobileOrg")
+  ;; Set to the files (or directory of files) you want sync'd
+  (setq org-agenda-files (quote ("~/Library/org-mode"
+                                 "~/SCICOMP/novartis.org")))
+  ;; Set to the name of the file where new notes will be stored
+  ;;(setq org-mobile-inbox-for-pull "~/Library/org-mode/from-mobile.org")
   
+      
 #+end_src
 
 *** Babel Settings
