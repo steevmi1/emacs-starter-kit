@@ -182,7 +182,9 @@ ido-mode is like magic pixie dust!
 
 ** Associate modes with file extensions
 #+begin_src emacs-lisp
-(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
+;; Disabling this to work around problem trying to commit in git.
+;;  https://github.com/magit/magit/issues/1014
+;;(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
