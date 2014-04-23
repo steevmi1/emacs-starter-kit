@@ -372,7 +372,7 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
   
     (add-to-list 'org-export-latex-classes
                  '("memarticle"
-                   "\\documentclass[11pt,oneside,article]{memoir}\n\\input{vc} % vc package"
+                   "\\documentclass[11pt,oneside,article]{memoir}\n\\input{vc} % vc package\n\\usepackage[minted,minion]{org-preamble-pdflatex}"
                     ("\\section{%s}" . "\\section*{%s}")
                     ("\\subsection{%s}" . "\\subsection*{%s}")
                     ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -382,6 +382,7 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
     (add-to-list 'org-export-latex-classes
                  '("membook"
                    "\\documentclass[11pt,oneside]{memoir}\n\\input{vc} % vc package"
+                   "\\usepackage[minted,minion]{org-preamble-pdflatex}"
                    ("\\chapter{%s}" . "\\chapter*{%s}")
                    ("\\section{%s}" . "\\section*{%s}")
                    ("\\subsection{%s}" . "\\subsection*{%s}")
@@ -418,7 +419,7 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
       ;; default packages for ordinary latex or pdflatex export
       (setq org-export-latex-default-packages-alist
             '(("AUTO" "inputenc" t)
-              ("minted,minion" "org-preamble-pdflatex" t)))        
+              ))        
       ;; Packages to include when xelatex is used
       (if (string-match "LATEX_CMD: xelatex" (buffer-string))
           (setq org-export-latex-default-packages-alist
@@ -558,6 +559,15 @@ Sometimes useful for getting help on R or Emacs.
                        '("irc.freenode.net"))
 #+end_src
 
+** Pianobar
+[2014-04-17 Thu 09:48]
+Load up pianobar.
+
+#+srcname: pianobar
+#+begin_src emacs-lisp
+(require 'pianobar)
+(setq pianobar-username "pandora@raingods.net")
+#+end_src
 ** Final Custom elements
 Some last tweaks. 
 
