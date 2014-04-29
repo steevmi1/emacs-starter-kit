@@ -405,8 +405,8 @@ Here are my =TODO= state keywords and colour settings:
 
 #+begin_src emacs-lisp :tangle yes
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!/!)")
-                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE"))))
+        (quote ((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")
+                (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)" "PHONE" "MEETING"))))
   
   (setq org-todo-keyword-faces
         (quote (("TODO" :foreground "red" :weight bold)
@@ -415,6 +415,7 @@ Here are my =TODO= state keywords and colour settings:
                 ("WAITING" :foreground "orange" :weight bold)
                 ("HOLD" :foreground "magenta" :weight bold)
                 ("CANCELLED" :foreground "forest green" :weight bold)
+                ("MEETING" :foreground "forest green" :weight bold)
                 ("PHONE" :foreground "forest green" :weight bold))))
 #+end_src
 *** Task States
@@ -581,12 +582,12 @@ Here is my setup for org-capture
 
 #+begin_src emacs-lisp :tangle yes
   (setq org-default-notes-file "~/Library/org-mode/refile.org")
-
+    
   ;; I use C-M-r to start capture mode
   (global-set-key (kbd "C-M-r") 'org-capture)
   ;; I use C-c r to start capture mode when using SSH from my Android phone
   (global-set-key (kbd "C-c r") 'org-capture)
-
+    
   ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, and org-protocol
   (setq org-capture-templates
         (quote (("t" "todo" entry (file "~/Library/org-mode/refile.org")
@@ -597,12 +598,14 @@ Here is my setup for org-capture
                  "* %?\n%U\n  %i" :clock-in t :clock-resume t)
                 ("w" "org-protocol" entry (file "~/Library/org-mode/refile.org")
                  "* TODO Review %c\n%U\n  %i" :immediate-finish t)
+                ("m" "Meeting" entry (file "~/Library/org-mode/refile.org")
+                 "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
                 ("p" "Phone call" entry (file "~/Library/org-mode/refile.org")
                  "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
                 ("h" "Habit" entry (file "~/Library/org-mode/refile.org")
                  "* NEXT %?\n%U\n%a\nSCHEDULED: %t .+1d/3d\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n  %i"))))
-
-
+    
+    
 #+end_src
 
 The =%i= in the templates inserts any text in the kill ring as part of
