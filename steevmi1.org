@@ -326,7 +326,7 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
   ;;(setq org-mobile-directory "~/Dropbox/MobileOrg")
   ;; Set to the files (or directory of files) you want sync'd
   (setq org-agenda-files (quote ("~/Library/org-mode"
-                                 "~/SCICOMP/novartis.org")))
+                                 "~/Novartis/NIBR.org")))
   ;; Set to the name of the file where new notes will be stored
   ;;(setq org-mobile-inbox-for-pull "~/Library/org-mode/from-mobile.org")
   
