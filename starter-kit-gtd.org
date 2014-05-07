@@ -599,7 +599,7 @@ Here is my setup for org-capture
                 ("w" "org-protocol" entry (file "~/Library/org-mode/refile.org")
                  "* TODO Review %c\n%U\n  %i" :immediate-finish t)
                 ("m" "Meeting" entry (file "~/Library/org-mode/refile.org")
-                 "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+                 "* MEETING %? :MEETING:\n%U" :clock-in t :clock-resume t)
                 ("p" "Phone call" entry (file "~/Library/org-mode/refile.org")
                  "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
                 ("h" "Habit" entry (file "~/Library/org-mode/refile.org")
