@@ -49,9 +49,9 @@ load it manually with =M-x load-theme solarized-light=.
   (prefer-coding-system 'utf-8)
   
   (when (window-system)
-    (require 'git-gutter-fringe))
+    (require 'git-gutter-fringe+))
   
-  (global-git-gutter-mode +1)
+  ;;(global-git-gutter-mode +1)
   (setq-default indicate-buffer-boundaries 'left)
   (setq-default indicate-empty-lines +1)
   

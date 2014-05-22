@@ -19,7 +19,7 @@ The following packages will be downloaded and installed.
                                 'exec-path-from-shell
                                 'expand-region
                                 ;; 'gist
-                                'git-gutter-fringe
+                                'git-gutter-fringe+
                                 'hl-line+
                                 ;; 'idle-highlight
                                 'inf-ruby
