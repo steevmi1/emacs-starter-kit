@@ -581,7 +581,7 @@ and pick the appropriate capture task.
 Here is my setup for org-capture
 
 #+begin_src emacs-lisp :tangle yes
-  (setq org-default-notes-file "~/Library/org-mode/refile.org")
+  (setq org-default-notes-file "~/.local/org-mode/refile.org")
     
   ;; I use C-M-r to start capture mode
   (global-set-key (kbd "C-M-r") 'org-capture)
@@ -590,19 +590,19 @@ Here is my setup for org-capture
     
   ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, and org-protocol
   (setq org-capture-templates
-        (quote (("t" "todo" entry (file "~/Library/org-mode/refile.org")
+        (quote (("t" "todo" entry (file "~/.local/org-mode/refile.org")
                  "* TODO %?\n%U\n%a\n  %i" :clock-in t :clock-resume t)
-                ("n" "note" entry (file "~/Library/org-mode/refile.org")
+                ("n" "note" entry (file "~/.local/org-mode/refile.org")
                  "* %? :NOTE:\n%U\n%a\n  %i" :clock-in t :clock-resume t)
-                ("j" "Journal" entry (file+datetree "~/Library/org-mode/diary.org")
+                ("j" "Journal" entry (file+datetree "~/.local/org-mode/diary.org")
                  "* %?\n%U\n  %i" :clock-in t :clock-resume t)
-                ("w" "org-protocol" entry (file "~/Library/org-mode/refile.org")
+                ("w" "org-protocol" entry (file "~/.local/org-mode/refile.org")
                  "* TODO Review %c\n%U\n  %i" :immediate-finish t)
-                ("m" "Meeting" entry (file "~/Library/org-mode/refile.org")
+                ("m" "Meeting" entry (file "~/.local/org-mode/refile.org")
                  "* MEETING %? :MEETING:\n%U" :clock-in t :clock-resume t)
-                ("p" "Phone call" entry (file "~/Library/org-mode/refile.org")
+                ("p" "Phone call" entry (file "~/.local/org-mode/refile.org")
                  "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
-                ("h" "Habit" entry (file "~/Library/org-mode/refile.org")
+                ("h" "Habit" entry (file "~/.local/org-mode/refile.org")
                  "* NEXT %?\n%U\n%a\nSCHEDULED: %t .+1d/3d\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n  %i"))))
     
     
