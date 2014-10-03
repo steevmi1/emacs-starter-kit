@@ -313,7 +313,7 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
     Where archived projects and tasks go.
 #+source: orgmode-archive
 #+begin_src emacs-lisp
-  (setq org-archive-location "~/Library/org-mode/archive.org::From %s")
+  (setq org-archive-location "~/.local/org-mode/archive.org::From %s")
 #+end_src
 
 *** Mobile Settings
@@ -321,14 +321,14 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
 #+src-name: orgmode-mobile
 #+begin_src emacs-lisp
   ;; Set to the location of your Org files on your local system
-  (setq org-directory "~/Library/org-mode")
+  (setq org-directory "~/.local/org-mode")
   ;; Set to <your Dropbox root directory>/MobileOrg.
   ;;(setq org-mobile-directory "~/Dropbox/MobileOrg")
   ;; Set to the files (or directory of files) you want sync'd
-  (setq org-agenda-files (quote ("~/Library/org-mode"
-                                 "~/Novartis/NIBR.org")))
+  (setq org-agenda-files (quote ("~/.local/org-mode"
+                                 "~/Documents/Novartis/NIBR.org")))
   ;; Set to the name of the file where new notes will be stored
-  ;;(setq org-mobile-inbox-for-pull "~/Library/org-mode/from-mobile.org")
+  ;;(setq org-mobile-inbox-for-pull "~/.local/org-mode/from-mobile.org")
   
       
 #+end_src
