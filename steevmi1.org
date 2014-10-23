@@ -348,7 +348,7 @@ When in an org-mode buffer, bind TeX-insert-quote to =C-c "=. Turned off by defa
    preferences and local configuration.
 
 #+source: orgmode-xelatex-export
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
     (require 'org-latex)   
     ;; Choose either listings or minted for exporting source code blocks.
     ;; Using minted (as here) requires pygments be installed. To use the
