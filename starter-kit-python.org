@@ -45,7 +45,6 @@ supplied by the Python distribution itself.
     
 #+end_src
 
-<<<<<<< HEAD
 ** Ipython
 Settings around configuring ipython, and ipython notebooks.
 
@@ -59,17 +58,6 @@ If you use the Jedi auto-completion method, change the =:tangle= flag below to =
 #+begin_src emacs-lisp :tangle no
   (setq jedi:setup-keys t)
   (add-hook 'python-mode-hook 'jedi:setup)  
-=======
-** Use Cython mode
-   :PROPERTIES:
-   :CUSTOM_ID: cython
-   :END:
-#+begin_src emacs-lisp
-  (when (require 'cython-mode nil 'no-error)
-    (add-to-list 'auto-mode-alist '("\\.pyx\\'" . cython-mode))
-    (add-to-list 'auto-mode-alist '("\\.pxd\\'" . cython-mode))
-    (add-to-list 'auto-mode-alist '("\\.pxi\\'" . cython-mode)))
->>>>>>> upstream/master
 #+end_src
 
 #+source: message-line
