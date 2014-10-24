@@ -61,6 +61,7 @@ The following packages will be downloaded and installed.
                                 'underwater-theme
                                 'pianobar
                                 'spacegray-theme
+                                'bbdb
                                 )
     "Libraries that should be installed by default.")
 #+end_src
