@@ -362,7 +362,7 @@ I have the following custom key bindings set up for my emacs (sorted by frequenc
 | F12     | Agenda (1 key less than C-c a)                  | Very Often |
 | C-c b   | Switch to org file                              | Very Often |
 | F11     | Goto currently clocked item                     | Very Often |
-| C-c c   | Capture a task                                  | Very Often |
+| C-c C-r   | Capture a task                                  | Very Often |
 | C-F11   | Clock in a task (show menu with prefix)         | Often      |
 | f9 g    | Gnus - I check mail regularly                   | Often      |
 | f5      | Show todo items for this subtree                | Often      |
@@ -427,7 +427,7 @@ Here is the keybinding setup in lisp:
 (global-set-key (kbd "<f11>") 'org-clock-goto)
 (global-set-key (kbd "C-<f11>") 'org-clock-in)
 (global-set-key (kbd "C-s-<f12>") 'bh/save-then-publish)
-(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c C-r") 'org-capture)
 
 (defun bh/hide-other ()
   (interactive)
@@ -673,7 +673,7 @@ Org Capture mode replaces remember mode for capturing tasks and notes.
 
 To add new tasks efficiently I use a minimal number of capture
 templates.  I used to have lots of capture templates, one for each
-org-file.  I'd start org-capture with =C-c c= and then pick a template
+org-file.  I'd start org-capture with =C-c C-r= and then pick a template
 that filed the task under =* Tasks= in the appropriate file.
 
 I found I still needed to refile these capture tasks again to the
@@ -707,8 +707,10 @@ Here is my setup for org-capture
 (setq org-directory "~/git/org")
 (setq org-default-notes-file "~/git/org/refile.org")
 
-;; I use C-c c to start capture mode
-(global-set-key (kbd "C-c c") 'org-capture)
+;; I use C-c C-r to start capture mode
+;;  Not sure why this is here as well -- it looks like we define this with all the other calls to
+;;  global-set-key.
+;;(global-set-key (kbd "C-c C-r") 'org-capture)
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
@@ -791,7 +793,7 @@ to do that.  I don't stop what I'm doing.  I'm probably clocking a
 project I'm working on and I don't want to lose my focus on that but I
 can't afford to forget this little thing that just came up.
 
-So what do I do?  Hit =C-c c= to start capture mode and select =t=
+So what do I do?  Hit =C-c C-r= to start capture mode and select =t=
 since it's a new task and I get a buffer like this:
 
 #+begin_src org :exports src
@@ -1091,7 +1093,7 @@ My day goes generally like this:
   - Clock it in
   - Work on it until it is =DONE= or it gets interrupted
 - Work on tasks
-- Make journal entries (=C-c c j=) for interruptions
+- Make journal entries (=C-c C-r j=) for interruptions
 - Punch out for lunch and punch back in after lunch
 - work on more tasks
 - Refile tasks to empty the list
@@ -1177,7 +1179,7 @@ Repeat this until all of the 'Respond to <user>' tasks are marked
 
 I read email and newgroups in Gnus so I don't separate clocked time
 for quickly looking at things.  If an article has a useful piece of
-information I want to remember I create a note for it with =C-c c n=
+information I want to remember I create a note for it with =C-c C-r n=
 and enter the topic and file it.  This takes practically no time at
 all and I know the note is safely filed for later retrieval.  The time
 I spend in the capture buffer is clocked with that capture note.
@@ -1623,7 +1625,7 @@ To deal with this we create a new capture task to record the thing we
 are about to do.  The workflow goes something like this:
 
 - You are clocking some task and an interruption occurs
-- Create a quick capture task journal entry =C-c c j=
+- Create a quick capture task journal entry =C-c C-r j=
 - Type the heading
 - go do that thing (eat lunch, whatever)
 - file it =C-c C-c=, this restores the clock back to the previous clocking task
@@ -2120,7 +2122,7 @@ triggers described previously in [[#ToDoStateTriggers][ToDo state triggers]]
 
   Often I'll find some cool feature or thing I want to remember while
   reading the org-mode and git mailing lists in Gnus.  To create a note
-  I use my note capture template =C-c c n=, type a heading for the note
+  I use my note capture template =C-c C-r n=, type a heading for the note
   and =C-c C-c= to save it.  The only other thing to do is to refile it
   (later) to the appropriate project file.
 
@@ -2160,7 +2162,7 @@ calls is done by capture mode.  I use a special capture template for
 phone calls combined with a custom function that replaces text with
 information from my =bbdb= addressbook database.
 
-=C-c c p= starts a capture task normally and I'm free to enter notes
+=C-c C-r p= starts a capture task normally and I'm free to enter notes
 from the call in the template immediately.  The cursor starts in the
 template normally where the name of the caller would be inserted.  I
 can use a =bbdb= lookup function to insert the name with =f9-p= or I
@@ -4107,7 +4109,7 @@ to this file only.  This is equivalent using a prefix argumment
 (=C-u C-c C-x <=) anywhere in the file.  This lock stays in
 effect until you remove it with =C-c C-x >=.
 
-This also works in the agenda with my =C-u C-c c-x <= key binding.
+This also works in the agenda with my =C-u C-c C-r-x <= key binding.
 
 Another way is to invoke the agenda with =F12 < a= while visiting an
 org-mode file.  This limits the agenda view to just this file.  I
@@ -5275,7 +5277,7 @@ described in [[#CaptureTemplates][Capture Templates]].
 #+begin_src emacs-lisp
 (require 'org-protocol)
 #+end_src
-The bulk of the setup is in the Firefox application so that C-c c on a
+The bulk of the setup is in the Firefox application so that C-c C-r on a
 page in Firefox will trigger the org-protocol capture template with
 details of the page I'm currently viewing in firefox.
 
