@@ -2508,8 +2508,6 @@ Callers of this function already widen the buffer view."
       (cond
        ((bh/is-project-p)
         subtree-end)
-       ((org-is-habit-p)
-        subtree-end)
        (t
         nil)))))
 
@@ -2519,9 +2517,7 @@ Callers of this function already widen the buffer view."
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (cond
-       ((org-is-habit-p)
-        next-headline)
-       ((and bh/hide-scheduled-and-waiting-next-tasks
+       ((bh/hide-scheduled-and-waiting-next-tasks
              (member "WAITING" (org-get-tags-at)))
         next-headline)
        ((bh/is-project-p)
@@ -2543,8 +2539,6 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
       (cond
        ((bh/is-project-p)
         next-headline)
-       ((org-is-habit-p)
-        subtree-end)
        ((and (not limit-to-project)
              (bh/is-project-subtree-p))
         subtree-end)
@@ -2564,8 +2558,6 @@ Skip project and sub-project tasks, habits, and project related tasks."
       (cond
        ((bh/is-project-p)
         subtree-end)
-       ((org-is-habit-p)
-        subtree-end)
        ((bh/is-project-subtree-p)
         subtree-end)
        (t
@@ -2581,8 +2573,6 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
       (cond
        ((bh/is-project-p)
         next-headline)
-       ((org-is-habit-p)
-        subtree-end)
        ((and (bh/is-project-subtree-p)
              (member (org-get-todo-state) (list "NEXT")))
         subtree-end)
@@ -2598,8 +2588,6 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
     (let ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
        ((bh/is-project-p)
-        subtree-end)
-       ((org-is-habit-p)
         subtree-end)
        (t
         nil)))))
