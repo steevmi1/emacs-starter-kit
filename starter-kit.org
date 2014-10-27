@@ -414,7 +414,7 @@ Registers for jumping to commonly used files in [[file:starter-kit-registers.org
 *** Starter kit completion and snippets
 Located in [[file:starter-kit-completion.org][starter-kit-completion]].
 
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp
   (starter-kit-load "starter-kit-completion.org")    
 #+end_src 
 
@@ -427,7 +427,7 @@ language.
 *** Starter kit Org-mode
 Located in [[file:starter-kit-org.org][starter-kit-org]].
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 (starter-kit-load "starter-kit-org.org")
 #+end_src
 *** Starter kit Org-mode GTD
