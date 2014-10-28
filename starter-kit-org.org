@@ -19,8 +19,9 @@ HTML and LaTeX exporters are shown by default. We add the Markdown exporter to t
 #+begin_src emacs-lisp
 
 ;; Autocomplete for orgmode
-(require 'org-ac)
-(org-ac/config-default)
+;;  Disable these, as they are causing org-capture to hang when I try to use sections.
+;;(require 'org-ac)
+;;(org-ac/config-default)
 
 ;; Markdown exporter
 (require 'ox-md)
@@ -41,7 +42,7 @@ HTML and LaTeX exporters are shown by default. We add the Markdown exporter to t
 ** COMMENT Org-Mode Hooks
 Make yasnippet work properly with org-mode. 
 
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
 ;;  (defun yas/org-very-safe-expand ()
 ;;    (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
 
@@ -88,7 +89,9 @@ are available at the beginning of a code block, the following key
 sequence =C-c C-v h= (bound to =org-babel-describe-bindings=) will
 display a list of the code blocks commands and their related keys.
 
-#+begin_src emacs-lisp
+DISABLED, already set in starter-kit-gtd.org.
+
+#+begin_src emacs-lisp :tangle no
   (setq org-use-speed-commands t)
 #+end_src
 
@@ -98,7 +101,10 @@ to activate more languages using the customize interface for the
 =org-babel-load-languages= variable, or with an elisp form like the
 one below.  The customize interface of =org-babel-load-languages=
 contains an up to date list of the currently supported languages.
-#+begin_src emacs-lisp
+
+DISABLED, will take list from starter-kit-gtd.org.
+
+#+begin_src emacs-lisp :tangle no
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
@@ -130,14 +136,17 @@ using the major-mode of the code.  It also changes the behavior of
 that reading and editing code form inside of your Org-mode files is
 much more like reading and editing of code using its major mode.
 #+begin_src emacs-lisp
-  (setq org-src-fontify-natively t)
+;;  This is set in starter-kit-org.org
+;;  (setq org-src-fontify-natively t)
   (setq org-src-tab-acts-natively t)
 #+end_src
 
 Don't ask for confirmation on every =C-c C-c= code-block compile. 
 
+DISABLED already set in starter-kit-gtd.org.kit
+
 #+source: turn-off-code-block-confirm
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :tangle no
   (setq org-confirm-babel-evaluate nil)
 #+end_src
 

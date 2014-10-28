@@ -427,7 +427,7 @@ language.
 *** Starter kit Org-mode
 Located in [[file:starter-kit-org.org][starter-kit-org]].
 
-#+begin_src emacs-lisp :tangle no
+#+begin_src emacs-lisp
 (starter-kit-load "starter-kit-org.org")
 #+end_src
 *** Starter kit Org-mode GTD
