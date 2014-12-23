@@ -725,7 +725,7 @@ Here is my setup for org-capture
               ("w" "org-protocol" entry (file "~/git/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ("m" "Meeting" entry (file "~/git/org/refile.org")
-               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
+               "* MEETING %? :MEETING:\n%U" :clock-in t :clock-resume t)
               ("p" "Phone call" entry (file "~/git/org/refile.org")
                "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
               ("h" "Habit" entry (file "~/git/org/refile.org")
@@ -2370,7 +2370,7 @@ follow up on the thing that I'm waiting for.
 
 I have the following helper functions defined for projects which are
 used by agenda views.
-#+header: 
+#+header: :tangle yes
 #+begin_src emacs-lisp
 (defun bh/is-project-p ()
   "Any task with a todo keyword subtask"
@@ -2511,6 +2511,8 @@ Callers of this function already widen the buffer view."
       (cond
        ((bh/is-project-p)
         subtree-end)
+       ((org-is-habit-p)
+        subtree-end)
        (t
         nil)))))
 
@@ -2520,7 +2522,9 @@ Callers of this function already widen the buffer view."
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (cond
-       ((bh/hide-scheduled-and-waiting-next-tasks
+       ((org-is-habit-p)
+        next-headline)
+       ((and bh/hide-scheduled-and-waiting-next-tasks
              (member "WAITING" (org-get-tags-at)))
         next-headline)
        ((bh/is-project-p)
@@ -2542,6 +2546,8 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
       (cond
        ((bh/is-project-p)
         next-headline)
+       ((org-is-habit-p)
+        subtree-end)
        ((and (not limit-to-project)
              (bh/is-project-subtree-p))
         subtree-end)
@@ -2561,6 +2567,8 @@ Skip project and sub-project tasks, habits, and project related tasks."
       (cond
        ((bh/is-project-p)
         subtree-end)
+       ((org-is-habit-p)
+        subtree-end)
        ((bh/is-project-subtree-p)
         subtree-end)
        (t
@@ -2576,6 +2584,8 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
       (cond
        ((bh/is-project-p)
         next-headline)
+       ((org-is-habit-p)
+        subtree-end)
        ((and (bh/is-project-subtree-p)
              (member (org-get-todo-state) (list "NEXT")))
         subtree-end)
@@ -2591,6 +2601,8 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
     (let ((subtree-end (save-excursion (org-end-of-subtree t))))
       (cond
        ((bh/is-project-p)
+        subtree-end)
+       ((org-is-habit-p)
         subtree-end)
        (t
         nil)))))
@@ -5024,7 +5036,8 @@ These are my settings for habit tracking.
 #+header: :tangle yes
 #+begin_src emacs-lisp
 ; Enable habit tracking (and a bunch of other modules)
-(setq org-modules (quote (org-bbdb
+(setq org-modules (quote (org-agenda
+                          org-bbdb
                           org-bibtex
                           org-crypt
                           org-gnus
