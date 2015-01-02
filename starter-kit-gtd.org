@@ -258,7 +258,7 @@ Here is my current =org-agenda-files= setup.
 (if (boundp 'org-user-agenda-files)
     (setq org-agenda-files org-user-agenda-files)
   (setq org-agenda-files (quote ("~/git/org"
-                                 "~/git/brandeis"
+;                                 "~/git/brandeis"
                                  "~/Documents/Novartis/NIBR.org"))))
 #+end_src
 
