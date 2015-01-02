@@ -5055,6 +5055,9 @@ These are my settings for habit tracking.
                           org-wl
                           org-w3m)))
 
+; Adding this to work around a problem with org-habit not loading correctly via org-modules
+(require 'org-habit)
+
 ; position the habit graph on the agenda to the right of the default
 (setq org-habit-graph-column 50)
 #+end_src
