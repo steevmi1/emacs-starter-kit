@@ -257,9 +257,9 @@ Here is my current =org-agenda-files= setup.
 ;;
 (if (boundp 'org-user-agenda-files)
     (setq org-agenda-files org-user-agenda-files)
-  (setq org-agenda-files (quote ("~/git/org"
-;                                 "~/git/brandeis"
-                                 "~/Documents/Novartis/NIBR.org"))))
+  (setq org-agenda-files (quote ("~/git/org"))))
+;;                                 "~/git/brandeis"
+;;                                 "~/Documents/Novartis/NIBR.org"))))
 #+end_src
 
 =org-mode= manages the =org-agenda-files= variable automatically using
@@ -2029,6 +2029,8 @@ be at the farm to make the call.
                             ("@personal" . ?P)
                             ("@learning" . ?l)
                             (:endgroup)
+                            ("2014" . ?4)
+                            ("2015" . ?5)
                             ("REFILE" . ?R)
                             ("WAITING" . ?w)
                             ("HOLD" . ?h)
