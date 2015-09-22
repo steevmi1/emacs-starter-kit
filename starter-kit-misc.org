@@ -136,6 +136,7 @@ ido-mode is like magic pixie dust!
 ** Other, tabs, imenu and a coding hook
 #+begin_src emacs-lisp 
   (set-default 'indent-tabs-mode nil)
+  (setq-default tab-width 4)
   (set-default 'indicate-empty-lines t)
   (set-default 'imenu-auto-rescan t)
   
