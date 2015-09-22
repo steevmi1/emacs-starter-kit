@@ -44,3 +44,5 @@ src/auctex-src/*elc
 /vc-git.awk
 /abbrev_defs
 /bookmarks
+ido.last*
+smex-items
