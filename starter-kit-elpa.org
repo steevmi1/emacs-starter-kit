@@ -65,6 +65,7 @@ The following packages will be downloaded and installed.
                                 'auctex
                                 'ess
                                 'r-autoyas                                
+                                'bbdb
                                 )
     "Libraries that should be installed by default.")
 #+end_src
