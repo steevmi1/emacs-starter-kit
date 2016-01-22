@@ -19,9 +19,14 @@ HTML and LaTeX exporters are shown by default. We add the Markdown exporter to t
 #+begin_src emacs-lisp
 
 ;; Autocomplete for orgmode
+<<<<<<< HEAD
 ;;  Disable these, as they are causing org-capture to hang when I try to use sections.
 ;;(require 'org-ac)
 ;;(org-ac/config-default)
+=======
+;; (require 'org-ac)
+;; (org-ac/config-default)
+>>>>>>> upstream/master
 
 ;; Markdown exporter
 (require 'ox-md)
@@ -39,7 +44,7 @@ HTML and LaTeX exporters are shown by default. We add the Markdown exporter to t
 ;; (if window-system (require 'org-mouse))
 #+end_src
 
-** COMMENT Org-Mode Hooks
+** Org-Mode Hooks
 Make yasnippet work properly with org-mode. 
 
 #+begin_src emacs-lisp :tangle no
@@ -108,6 +113,7 @@ DISABLED, will take list from starter-kit-gtd.org.
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
+<<<<<<< HEAD
      (shell . t)
      (R . t)
      (perl . t)
@@ -115,6 +121,9 @@ DISABLED, will take list from starter-kit-gtd.org.
      (python . t)
      (js . t)
      (haskell . t)))
+=======
+   (shell . t)))
+>>>>>>> upstream/master
 #+end_src
 
 The next block makes org-babel aware that a lower-case 'r' in a =src= block header should be processed as R. 

@@ -4,25 +4,91 @@ Yasnippet is a snippet expansion system for Emacs. It uses short phrases and the
 
 ** Load the yasnippet bundle
 #+begin_src emacs-lisp :tangle yes
-  (add-to-list 'load-path
-                 (expand-file-name  "yasnippet"
-                                    (expand-file-name "elpa"
-                                                      dotfiles-dir)))
-  (require 'yasnippet)
-;;  (yas/set-ac-modes)
-;;  (yas/enable-emacs-lisp-paren-hack)
-  (yas/global-mode 1)
+    (add-to-list 'load-path
+                   (expand-file-name  "yasnippet"
+                                      (expand-file-name "elpa"
+                                                        dotfiles-dir)))
+    (require 'yasnippet)
+  ;;  (yas/set-ac-modes)
+  ;;  (yas/enable-emacs-lisp-paren-hack)
+    (yas/global-mode 1)
 #+end_src
 
 Load the snippets defined in the package's =./snippets/= directory, and local snippets from the =./local-snippets/= directory. 
 
 #+begin_src emacs-lisp :tangle yes
-  (yas/load-directory (expand-file-name "snippets" dotfiles-dir))
- 
+  (yas/load-directory (expand-file-name "snippets" dotfiles-dir)) 
 #+end_src
 
-** Load Autocomplete
-#+begin_src emacs-lisp 
+#+begin_src emacs-lisp tangle: yes
+
+(defun check-expansion ()
+    (save-excursion
+      (if (looking-at "\\_>") t
+        (backward-char 1)
+        (if (looking-at "\\.") t
+          (backward-char 1)
+          (if (looking-at "->") t nil)))))
+
+  (defun do-yas-expand ()
+    (let ((yas/fallback-behavior 'return-nil))
+      (yas/expand)))
+
+  (defun tab-indent-or-complete ()
+    (interactive)
+    (if (minibufferp)
+        (minibuffer-complete)
+      (if (or (not yas/minor-mode)
+              (null (do-yas-expand)))
+          (if (check-expansion)
+              (company-complete-common)
+            (indent-for-tab-command)))))
+
+  (global-set-key [tab] 'tab-indent-or-complete)
+
+#+end_src
+
+** Company Mode
+Auto-completion of text and code. 
+
+We use the `:with` keyword to include dabbrev in every backend, which gives us completion from everything that's in the buffer (and other open buffers).
+
+#+source: company-mode
+#+begin_src emacs-lisp
+
+  (require 'company)
+  (add-hook 'after-init-hook 'global-company-mode)
+  (add-to-list 'company-backends '(company-css :with company-dabbrev))
+  (add-to-list 'company-backends '(company-capf :with company-dabbrev))
+  (add-to-list 'company-backends '(company-web-html :with company-dabbrev))
+  (add-to-list 'company-backends '(company-R-objects :with company-dabbrev))
+  (add-to-list 'company-backends '(company-R-args :with company-dabbrev))
+  (add-to-list 'company-backends '(company-files :with company-dabbrev))
+
+  (setq company-idle-delay 0.1)
+  (setq company-minimum-prefix-length 4)
+  (setq company-selection-wrap-around t)
+  (setq company-quickhelp-delay 0.15)
+  (setq company-dabbrev-other-buffers t)
+  (setq company-dabbrev-downcase nil)
+  (setq company-dabbrev-minimum-length 4)
+
+  (company-auctex-init)
+  (setq company-tooltip-align-annotations t)
+    
+  (require 'company-statistics)
+  (company-statistics-mode)
+
+  (define-key company-active-map (kbd "<tab>") (lambda () (interactive) (company-complete-common-or-cycle 1)))
+  (define-key company-active-map (kbd "<backtab>") (lambda () (interactive) (company-complete-common-or-cycle -1)))
+  (global-company-mode t)
+#+end_src
+
+** Autocomplete
+We use company mode, as initiated above, but here's a working auto-complete setup as an alternative. Don't use company mode and autocomplete together. To switch from company-mode to autocomplete, move the `tangle: no` from the `begin_src` line below up to the corresponding line in the `company-mode` section above. Then open the `starter-kit-elpa.org` file, uncomment the `autocomplete` and `ac-` extensions there, and restart Emacs.
+
+#+source:  autocomplete
+#+begin_src emacs-lisp :tangle no
   (require 'auto-complete)
   (require 'auto-complete-config)
   (global-auto-complete-mode t)
@@ -34,9 +100,13 @@ Load the snippets defined in the package's =./snippets/= directory, and local sn
   (ac-flyspell-workaround)
   (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
   (define-key ac-completing-map (kbd "C-c h") 'ac-quick-help)  
+  (add-hook 'html-mode-hook 'ac-html-enable)
+
 #+end_src 
+
 
 #+source: message-line
 #+begin_src emacs-lisp
   (message "Starter Kit Completion loaded.")
 #+end_src
+
