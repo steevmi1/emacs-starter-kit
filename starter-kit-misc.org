@@ -17,9 +17,8 @@ loading the =zenburn= and =anti-zenburn= themes.
 #+source: colors
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa")
-  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
   (setq custom-safe-themes t)
-  (load-theme 'solarized-dark t)
+  (load-theme 'zenburn t)
 #+end_src
 
 ** Window system 
@@ -30,28 +29,20 @@ loading the =zenburn= and =anti-zenburn= themes.
     (setq frame-title-format '(buffer-file-name "%f" ("%b")))
     (tooltip-mode -1)
     (tool-bar-mode -1)
-    (blink-cursor-mode -1)
-    (scroll-bar-mode -1))
-  
+    (blink-cursor-mode -1))
+
   (mouse-wheel-mode t)
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
-  
-  (when (window-system)
-    (require 'git-gutter-fringe+))
-  
-  ;;(global-git-gutter-mode +1)
-  (setq-default indicate-buffer-boundaries 'left)
-  (setq-default indicate-empty-lines +1)
-  
+
   (setq visible-bell t
         echo-keystrokes 0.1
         font-lock-maximum-decoration t
         font-lock-verbose nil
         inhibit-startup-message t
         transient-mark-mode t
-        ;;  color-theme-is-global t
+      ;;  color-theme-is-global t
         delete-by-moving-to-trash t
         shift-select-mode nil
         truncate-partial-width-windows nil
@@ -139,7 +130,6 @@ ido-mode is like magic pixie dust!
 ** Other, tabs, imenu and a coding hook
 #+begin_src emacs-lisp 
   (set-default 'indent-tabs-mode nil)
-  (setq-default tab-width 4)
   (set-default 'indicate-empty-lines t)
   (set-default 'imenu-auto-rescan t)
   
@@ -190,9 +180,7 @@ A nicer modeline.
 
 ** Associate modes with file extensions
 #+begin_src emacs-lisp
-;; Disabling this to work around problem trying to commit in git.
-;;  https://github.com/magit/magit/issues/1014
-;;(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
+(add-to-list 'auto-mode-alist '("COMMIT_EDITMSG$" . diff-mode))
 (add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
@@ -211,31 +199,3 @@ A nicer modeline.
 #+begin_src emacs-lisp
   (message "Starter Kit Misc loaded.")
 #+end_src
-
-** magit
-Start to customize magit some.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun oni:magit-log-edit-mode-func ()
-  "Function for `magit-log-edit-mode-hook'."
-  (auto-fill-mode)
-  (set-fill-column 72)
-  (flyspell-mode))
-
-(add-hook 'magit-log-edit-mode-hook 'oni:magit-log-edit-mode-func)
-(add-hook 'magit-log-edit-mode-hook 'turn-on-orgstruct)
-(add-hook 'magit-log-edit-mode-hook 'turn-on-orgstruct++)
-#+END_SRC
-
-[2013-05-14 Tue 10:27]
-** Scrolling behavior
-Make scrolling a bit better when using keyboard to move around.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq redisplay-dont-pause t
-      scroll-margin 1
-      scroll-step 1
-      scroll-conservatively 10000
-      scroll-preserve-screen-position 1)
-#+END_SRC
-[2013-10-24 Thu 14:50]
