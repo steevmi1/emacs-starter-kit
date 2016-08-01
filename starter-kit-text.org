@@ -137,7 +137,6 @@ Markdown mode support.
 
   (add-hook 'markdown-mode-hook 'latex-unicode-simplified)
 
-
 #+end_src
 
 #+source: message-line
