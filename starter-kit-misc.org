@@ -186,6 +186,7 @@ A nicer modeline.
 (add-to-list 'auto-mode-alist '("\\.ya?ml$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.rb$" . ruby-mode))
 (add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("\\.dot$" . graphviz-dot-mode))
 #+end_src
 
 ** Default to unified diffs
