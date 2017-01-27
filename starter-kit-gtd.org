@@ -152,6 +152,7 @@ files.
 (add-to-list 'load-path (expand-file-name "~/git/org-mode/lisp"))
 (add-to-list 'auto-mode-alist '("\\.\\(org\\|org_archive\\|txt\\)$" . org-mode))
 (require 'org)
+(require 'org-habit)
 ;;
 ;; Standard key bindings
 (global-set-key "\C-cl" 'org-store-link)
@@ -258,8 +259,6 @@ Here is my current =org-agenda-files= setup.
 (if (boundp 'org-user-agenda-files)
     (setq org-agenda-files org-user-agenda-files)
   (setq org-agenda-files (quote ("~/git/org"))))
-;;                                 "~/git/brandeis"
-;;                                 "~/Documents/Novartis/NIBR.org"))))
 #+end_src
 
 =org-mode= manages the =org-agenda-files= variable automatically using
@@ -362,7 +361,7 @@ I have the following custom key bindings set up for my emacs (sorted by frequenc
 | F12     | Agenda (1 key less than C-c a)                  | Very Often |
 | C-c b   | Switch to org file                              | Very Often |
 | F11     | Goto currently clocked item                     | Very Often |
-| C-c C-r   | Capture a task                                  | Very Often |
+| C-c c   | Capture a task                                  | Very Often |
 | C-F11   | Clock in a task (show menu with prefix)         | Often      |
 | f9 g    | Gnus - I check mail regularly                   | Often      |
 | f5      | Show todo items for this subtree                | Often      |
@@ -427,7 +426,7 @@ Here is the keybinding setup in lisp:
 (global-set-key (kbd "<f11>") 'org-clock-goto)
 (global-set-key (kbd "C-<f11>") 'org-clock-in)
 (global-set-key (kbd "C-s-<f12>") 'bh/save-then-publish)
-(global-set-key (kbd "C-c C-r") 'org-capture)
+(global-set-key (kbd "C-c c") 'org-capture)
 
 (defun bh/hide-other ()
   (interactive)
@@ -538,7 +537,7 @@ CANCELLED:c
 WAITING --> DONE
 #+end_src
 
-#+results[c0362b66d6337f3ae0ac7ab2d715687debfa6652]:
+#+results[61c867b8eb4f49bc47e44ec2b534ac3219d82594]:
 [[file:normal_task_states.png]]
 
 *** Project Task States
@@ -572,7 +571,7 @@ title Phone Call Task State
 PHONE -> [*]
 #+end_src
 
-#+results[7fcae03150f58bbcc260379916083e99a91983c4]:
+#+results[9e27f3a56c4fca8f05455e6dfa1282030ae52830]:
 [[file:phone_states.png]]
 
 *** Meetings
@@ -599,7 +598,7 @@ title Meeting Task State
 MEETING -> [*]
 #+end_src
 
-#+results[27cce0a2a2c020d46bb1801a287cca4327a13dff]:
+#+results[942fb408787905ffcdde421ee02edabdbb921b06]:
 [[file:meeting_states.png]]
 
 ** Fast Todo Selection
@@ -673,7 +672,7 @@ Org Capture mode replaces remember mode for capturing tasks and notes.
 
 To add new tasks efficiently I use a minimal number of capture
 templates.  I used to have lots of capture templates, one for each
-org-file.  I'd start org-capture with =C-c C-r= and then pick a template
+org-file.  I'd start org-capture with =C-c c= and then pick a template
 that filed the task under =* Tasks= in the appropriate file.
 
 I found I still needed to refile these capture tasks again to the
@@ -707,10 +706,8 @@ Here is my setup for org-capture
 (setq org-directory "~/git/org")
 (setq org-default-notes-file "~/git/org/refile.org")
 
-;; I use C-c C-r to start capture mode
-;;  Not sure why this is here as well -- it looks like we define this with all the other calls to
-;;  global-set-key.
-;;(global-set-key (kbd "C-c C-r") 'org-capture)
+;; I use C-c c to start capture mode
+(global-set-key (kbd "C-c c") 'org-capture)
 
 ;; Capture templates for: TODO tasks, Notes, appointments, phone calls, meetings, and org-protocol
 (setq org-capture-templates
@@ -725,12 +722,11 @@ Here is my setup for org-capture
               ("w" "org-protocol" entry (file "~/git/org/refile.org")
                "* TODO Review %c\n%U\n" :immediate-finish t)
               ("m" "Meeting" entry (file "~/git/org/refile.org")
-               "* MEETING %? :MEETING:\n%U" :clock-in t :clock-resume t)
+               "* MEETING with %? :MEETING:\n%U" :clock-in t :clock-resume t)
               ("p" "Phone call" entry (file "~/git/org/refile.org")
                "* PHONE %? :PHONE:\n%U" :clock-in t :clock-resume t)
               ("h" "Habit" entry (file "~/git/org/refile.org")
-               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"<%Y-%m-%d %a .+1d/3d>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n")
-               )))
+               "* NEXT %?\n%U\n%a\nSCHEDULED: %(format-time-string \"%<<%Y-%m-%d %a .+1d/3d>>\")\n:PROPERTIES:\n:STYLE: habit\n:REPEAT_TO_STATE: NEXT\n:END:\n"))))
 #+end_src
 
 Capture mode now handles automatically clocking in and out of a
@@ -764,7 +760,9 @@ they occur.
     (org-remove-empty-drawer-at (point))))
 
 (add-hook 'org-clock-out-hook 'bh/remove-empty-drawer-on-clock-out 'append)
+
 #+end_src
+
 ** Separate file for Capture Tasks
 :PROPERTIES:
 :CUSTOM_ID: CaptureRefileOrg
@@ -793,7 +791,7 @@ to do that.  I don't stop what I'm doing.  I'm probably clocking a
 project I'm working on and I don't want to lose my focus on that but I
 can't afford to forget this little thing that just came up.
 
-So what do I do?  Hit =C-c C-r= to start capture mode and select =t=
+So what do I do?  Hit =C-c c= to start capture mode and select =t=
 since it's a new task and I get a buffer like this:
 
 #+begin_src org :exports src
@@ -1068,6 +1066,9 @@ My block agenda view looks like this when not narrowed to a project.
 This shows top-level projects and =NEXT= tasks but hides the project details since
 we are not focused on any particular project.
 
+*NOTE:* This agenda screen shot is out of date and does not currently match the agenda setup in this document.
+This will be fixed soon.
+
 [[file:block-agenda-nonproject.png]]
 
 After selecting a project (with =P= on any task in the agenda) the block agenda changes to show the project and
@@ -1075,6 +1076,10 @@ any subprojects in the Projects section.  Tasks show project-related tasks that 
 narrowed to a project.
 
 This makes it easy to focus on the task at hand.
+
+*NOTE:* This agenda screen shot is out of date and does not currently match the agenda setup in this document.
+This will be fixed soon.
+
 
 [[file:block-agenda-project.png]]
 
@@ -1093,7 +1098,7 @@ My day goes generally like this:
   - Clock it in
   - Work on it until it is =DONE= or it gets interrupted
 - Work on tasks
-- Make journal entries (=C-c C-r j=) for interruptions
+- Make journal entries (=C-c c j=) for interruptions
 - Punch out for lunch and punch back in after lunch
 - work on more tasks
 - Refile tasks to empty the list
@@ -1179,7 +1184,7 @@ Repeat this until all of the 'Respond to <user>' tasks are marked
 
 I read email and newgroups in Gnus so I don't separate clocked time
 for quickly looking at things.  If an article has a useful piece of
-information I want to remember I create a note for it with =C-c C-r n=
+information I want to remember I create a note for it with =C-c c n=
 and enter the topic and file it.  This takes practically no time at
 all and I know the note is safely filed for later retrieval.  The time
 I spend in the capture buffer is clocked with that capture note.
@@ -1625,7 +1630,7 @@ To deal with this we create a new capture task to record the thing we
 are about to do.  The workflow goes something like this:
 
 - You are clocking some task and an interruption occurs
-- Create a quick capture task journal entry =C-c C-r j=
+- Create a quick capture task journal entry =C-c c j=
 - Type the heading
 - go do that thing (eat lunch, whatever)
 - file it =C-c C-c=, this restores the clock back to the previous clocking task
@@ -2025,16 +2030,18 @@ be at the farm to make the call.
 #+begin_src emacs-lisp
 ; Tags with fast selection keys
 (setq org-tag-alist (quote ((:startgroup)
-                            ("@NIBR" . ?N)
-                            ("@personal" . ?P)
-                            ("@learning" . ?l)
+                            ("@errand" . ?e)
+                            ("@office" . ?o)
+                            ("@home" . ?H)
+                            ("@farm" . ?f)
                             (:endgroup)
-                            ("2014" . ?4)
-                            ("2015" . ?5)
-                            ("REFILE" . ?R)
                             ("WAITING" . ?w)
                             ("HOLD" . ?h)
+                            ("PERSONAL" . ?P)
+                            ("WORK" . ?W)
+                            ("FARM" . ?F)
                             ("ORG" . ?O)
+                            ("NORANG" . ?N)
                             ("crypt" . ?E)
                             ("NOTE" . ?n)
                             ("CANCELLED" . ?c)
@@ -2120,7 +2127,7 @@ triggers described previously in [[#ToDoStateTriggers][ToDo state triggers]]
 
   Often I'll find some cool feature or thing I want to remember while
   reading the org-mode and git mailing lists in Gnus.  To create a note
-  I use my note capture template =C-c C-r n=, type a heading for the note
+  I use my note capture template =C-c c n=, type a heading for the note
   and =C-c C-c= to save it.  The only other thing to do is to refile it
   (later) to the appropriate project file.
 
@@ -2160,7 +2167,7 @@ calls is done by capture mode.  I use a special capture template for
 phone calls combined with a custom function that replaces text with
 information from my =bbdb= addressbook database.
 
-=C-c C-r p= starts a capture task normally and I'm free to enter notes
+=C-c c p= starts a capture task normally and I'm free to enter notes
 from the call in the template immediately.  The cursor starts in the
 template normally where the name of the caller would be inserted.  I
 can use a =bbdb= lookup function to insert the name with =f9-p= or I
@@ -2501,6 +2508,18 @@ Callers of this function already widen the buffer view."
             subtree-end))))
     (save-excursion (org-end-of-subtree t))))
 
+(defun bh/skip-non-tasks ()
+  "Show non-project tasks.
+Skip project and sub-project tasks, habits, and project related tasks."
+  (save-restriction
+    (widen)
+    (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
+      (cond
+       ((bh/is-task-p)
+        nil)
+       (t
+        next-headline)))))
+
 (defun bh/skip-project-trees-and-habits ()
   "Skip trees that are projects"
   (save-restriction
@@ -2520,11 +2539,11 @@ Callers of this function already widen the buffer view."
     (widen)
     (let ((next-headline (save-excursion (or (outline-next-heading) (point-max)))))
       (cond
-       ((org-is-habit-p)
-        next-headline)
-       ((and bh/hide-scheduled-and-waiting-next-tasks
-             (member "WAITING" (org-get-tags-at)))
-        next-headline)
+;;       ((org-is-habit-p)
+;;        next-headline)
+;;       ((bh/hide-scheduled-and-waiting-next-tasks
+;;             (member "WAITING" (org-get-tags-at)))
+;;        next-headline)
        ((bh/is-project-p)
         next-headline)
        ((and (bh/is-task-p) (not (bh/is-project-subtree-p)))
@@ -2544,8 +2563,8 @@ When not restricted, skip project and sub-project tasks, habits, and project rel
       (cond
        ((bh/is-project-p)
         next-headline)
-       ((org-is-habit-p)
-        subtree-end)
+;;       ((org-is-habit-p)
+;;        subtree-end)
        ((and (not limit-to-project)
              (bh/is-project-subtree-p))
         subtree-end)
@@ -2565,8 +2584,8 @@ Skip project and sub-project tasks, habits, and project related tasks."
       (cond
        ((bh/is-project-p)
         subtree-end)
-       ((org-is-habit-p)
-        subtree-end)
+;;       ((org-is-habit-p)
+;;        subtree-end)
        ((bh/is-project-subtree-p)
         subtree-end)
        (t
@@ -2582,8 +2601,8 @@ Skip project and sub-project tasks, habits, and loose non-project tasks."
       (cond
        ((bh/is-project-p)
         next-headline)
-       ((org-is-habit-p)
-        subtree-end)
+;;       ((org-is-habit-p)
+;;        subtree-end)
        ((and (bh/is-project-subtree-p)
              (member (org-get-todo-state) (list "NEXT")))
         subtree-end)
@@ -2862,7 +2881,7 @@ on your system.
          (ruby . t)
          (gnuplot . t)
          (clojure . t)
-         (shell . t)
+         (sh . t)
          (ledger . t)
          (org . t)
          (plantuml . t)
@@ -2942,7 +2961,7 @@ Here's an example without the =#+begin_src= and =#+end_src= lines.
 +-----------------+                                                         
 #+end_src
 
-#+results[57642756cd4e509e2a4f67c40a5147ecb935933e]:
+#+results[b72ce84b1be00db6721081a8353a0c879f187fdd]:
 [[file:communication.png]]
 
 ** Playing with graphviz
@@ -3000,7 +3019,7 @@ digraph G {
 }
 #+end_src
 
-#+results[4bf665d19d319ee40e628cfc80170af69cfb776f]:
+#+results[296ce064f7aab7f79ba32a4e903ed7a31b01ca73]:
 [[file:gv01.png]]
 
 The =-Kdot= is optional (defaults to =dot=) but you can substitute other graphviz
@@ -3043,7 +3062,7 @@ Client -> Client: Saves token
 deactivate Client
 #+end_src
 
-#+results[6aff72a7a7c6801812c59c389114f65d462a61a0]:
+#+results[9b612e0e68cd747fc032d949b739f4c5b06dee21]:
 [[file:sequence.png]]
 
 *** Activity Diagram
@@ -3074,7 +3093,7 @@ endif
 --> (*)
 #+end_src
 
-#+results[1a0bdaefe8858ab0a55252b9c57fc16f57e27ea5]:
+#+results[d5646e42c69b25b55eb1699a43c5d9547c019c5e]:
 [[file:activity.png]]
 
 *** Usecase Diagram
@@ -3087,7 +3106,7 @@ LabUser --> (Runs Simulation)
 LabUser --> (Analyses Results)
 #+end_src
 
-#+results[14e8911f8940efbc6b90b57dcfa4eecce4a31d9f]:
+#+results[b7079ee21eb099b19ca524bf62e84edb7c317890]:
 [[file:usecase.png]]
 
 *** Object Diagram
@@ -3104,7 +3123,7 @@ Object2: setState()
 Object2: state
 #+end_src
 
-#+results[43eece3c12be40bac32cf12898e47d66ec1251da]:
+#+results[12eb2caa1043195361ca1953b474932e796e80f5]:
 [[file:object.png]]
 
 *** State Diagram
@@ -3123,7 +3142,7 @@ State3 --> Finish
 Finish --> [*]
 #+end_src
 
-#+results[d349aa79d785fec37ad60b1bcf43ced6df10aeb6]:
+#+results[5faa6c28383266f9e8b76f4a8c70012f7ab70753]:
 [[file:plantuml_example_states.png]]
 
 ** Publishing Single Files
@@ -3704,7 +3723,7 @@ note left: test
 @enduml
 #+end_src
 
-#+results[e196c6f48d5adbbf2b0300c87127c560d9913669]:
+#+results[941b135a91506a3806dcb1dcc07c18b23c0cd608]:
 [[file:test-act.png]]
 
 Put cursor on --> (*) and enter "sif RET"
@@ -3732,7 +3751,7 @@ end if
 @enduml
 #+end_src
 
-#+results[44839e6d5984e19cc3be9d5392f18fc11aade43c]:
+#+results[0b3365856895b29376087110b72d8cd127d3b4f7]:
 [[file:test-act2.png]]
 
 repeat on --> (*) line
@@ -3767,7 +3786,7 @@ end if
 @enduml
 #+end_src
 
-#+results[4f0d2bf2fed3fe0dc067e922132e8629d11bd224]:
+#+results[f1e8e6dfcb6cfc183b56196edb5769e53b7ad127]:
 [[file:test-act3.png]]
 
 and add two for loops at the end with "sfor RET line in file RET" and
@@ -3812,7 +3831,7 @@ note left: Loop2: End for each address in addressbook
 @enduml
 #+end_src
 
-#+results[178bbf661c1d4b459cc11b7b88ca339a4d9f85d1]:
+#+results[dffc80c1690d0ffc945596218c6264aa99f52ec5]:
 [[file:test-act4.png]]
 
 I use rectangular cut and paste if I need to indent generated blocks.
@@ -4119,7 +4138,7 @@ to this file only.  This is equivalent using a prefix argumment
 (=C-u C-c C-x <=) anywhere in the file.  This lock stays in
 effect until you remove it with =C-c C-x >=.
 
-This also works in the agenda with my =C-u C-c C-r-x <= key binding.
+This also works in the agenda with my =C-u C-c c-x <= key binding.
 
 Another way is to invoke the agenda with =F12 < a= while visiting an
 org-mode file.  This limits the agenda view to just this file.  I
@@ -5034,8 +5053,7 @@ These are my settings for habit tracking.
 #+header: :tangle yes
 #+begin_src emacs-lisp
 ; Enable habit tracking (and a bunch of other modules)
-(setq org-modules (quote (org-agenda
-                          org-bbdb
+(setq org-modules (quote (org-bbdb
                           org-bibtex
                           org-crypt
                           org-gnus
@@ -5052,9 +5070,6 @@ These are my settings for habit tracking.
                           org-vm
                           org-wl
                           org-w3m)))
-
-; Adding this to work around a problem with org-habit not loading correctly via org-modules
-(require 'org-habit)
 
 ; position the habit graph on the agenda to the right of the default
 (setq org-habit-graph-column 50)
@@ -5291,7 +5306,7 @@ described in [[#CaptureTemplates][Capture Templates]].
 #+begin_src emacs-lisp
 (require 'org-protocol)
 #+end_src
-The bulk of the setup is in the Firefox application so that C-c C-r on a
+The bulk of the setup is in the Firefox application so that C-c c on a
 page in Firefox will trigger the org-protocol capture template with
 details of the page I'm currently viewing in firefox.
 
@@ -5717,7 +5732,7 @@ because IDO completion is so easy.
 Here's the smex setup I use
 #+header: :tangle yes
 #+begin_src emacs-lisp
-;; (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (require 'smex)
 (smex-initialize)
 
