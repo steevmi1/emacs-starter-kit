@@ -5732,7 +5732,9 @@ because IDO completion is so easy.
 Here's the smex setup I use
 #+header: :tangle yes
 #+begin_src emacs-lisp
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+;;  Remove the load-path, since it's throwing a warning and we don't 
+;;  strictly need this.
+;;(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (require 'smex)
 (smex-initialize)
 
