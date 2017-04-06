@@ -22,7 +22,7 @@
                                  "org" (expand-file-name
                                         "src" dotfiles-dir))))
 
-(add-to-list 'load-path (expand-file-name "~/git/org-mode/lisp"))
+(add-to-list 'load-path (expand-file-name "~/Documents/git/org-mode/lisp"))
 
 ;; Package Locations
 ;; Location of various local packages (in .emacs.d/vendor or .emacs.d/src)
