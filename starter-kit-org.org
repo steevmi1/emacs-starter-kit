@@ -108,7 +108,7 @@ DISABLED, will take list from starter-kit-gtd.org.
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((emacs-lisp . t)
-     (shell . t)
+     (sh . t)
      (R . t)
      (perl . t)
      (ruby . t)
