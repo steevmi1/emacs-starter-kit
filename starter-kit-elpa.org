@@ -67,6 +67,7 @@ The following packages will be downloaded and installed.
                               'r-autoyas                                
                               'bbdb
                               'graphviz-dot-mode
+                              'lua-mode
                               )
   "Libraries that should be installed by default.")
 #+end_src

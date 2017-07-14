@@ -147,6 +147,14 @@ In dired mode, visit all marked files using. Bound to the "F" key.
 #+begin_src emacs-lisp
 (add-to-list 'auto-mode-alist '("\\.m$" . octave-mode))
 #+end_src
+*** LUA settings
+[2017-07-14 Fri 11:26]
+#+name: lua-mode
+#+begin_src emacs-lisp
+(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
+(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
+(add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
+#+end_src
 ** Local LaTeX settings
 *** In-text Smart Quotes (XeLaTeX only)
     Redefine TeX-open-quote and TeX-close-quote to be smart quotes by default. Below, in the local org-mode settings, we'll also map the relevant function to a key we can use in org-mode, too. If you don't use XeLaTeX for processing all your =.tex= files, you should disable this option.
