@@ -186,9 +186,9 @@ Set up AUCTeX to work with the Skim PDF viewer.
     ;; (setq-default TeX-master nil)
     
     ;; Auto-raise Emacs on activation (from Skim, usually)
-    (defun raise-emacs-on-aqua()
-    (shell-command "osascript -e 'tell application \"Emacs\" to activate' &"))
-    (add-hook 'server-switch-hook 'raise-emacs-on-aqua)
+    ;;(defun raise-emacs-on-aqua()
+    ;;(shell-command "osascript -e 'tell application \"Emacs\" to activate' &"))
+    ;;(add-hook 'server-switch-hook 'raise-emacs-on-aqua)
 #+end_src
 
 *** Local RefTeX Settings
