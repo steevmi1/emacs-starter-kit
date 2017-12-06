@@ -19,7 +19,7 @@ loading the =zenburn= and =anti-zenburn= themes.
   (add-to-list 'custom-theme-load-path "~/.emacs.d/elpa")
   (add-to-list 'custom-theme-load-path "~/Documents/git/atom-one-dark-theme")
   (setq custom-safe-themes t)
-  (load-theme 'atom-one-dark t)
+  (load-theme 'solarized-dark t)
 #+end_src
 
 ** Window system 
