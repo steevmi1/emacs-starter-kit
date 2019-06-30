@@ -79,7 +79,8 @@ Polymode is a package that supports multiple modes inside a single buffer. It is
   (setq comint-move-point-for-output t)
   (defun my-ess-start-R ()
     (interactive)
-    (if (not (member "*R*" (mapcar (function buffer-name) (buffer-list))))
+    (unless (mapcar (lambda (s) (string-match "*R" (buffer-name s))) (buffer-list))
+;;    (unless (string-match "*R" (mapcar (function buffer-name) (buffer-list)))
       (progn
 	(delete-other-windows)
 	(setq w1 (selected-window))
