@@ -9,69 +9,6 @@ This is part of the [[file:starter-kit.org][Emacs Starter Kit]].
 The following packages will be downloaded and installed.
 
 #+begin_src emacs-lisp
-<<<<<<< HEAD
-(defvar starter-kit-packages (list 
-                              'adaptive-wrap  
-                              'ag
-                              'anti-zenburn-theme
-                              ;;'auto-complete
-                              ;;'ac-emmet
-                              ;;'ac-etags
-                              ;;'ac-ispell
-                              'org-ac
-                              'browse-kill-ring
-                              'company
-                              'company-auctex
-                              'company-math
-                              'company-web
-                              'company-statistics
-                              'company-quickhelp
-                              'css-mode
-                              'csv-mode
-                              'deft
-                              'emmet-mode
-                              'exec-path-from-shell
-                              'expand-region
-                              'flycheck
-                              'flx-ido
-                              ;; 'gist
-                              'hl-line+
-                              'idle-highlight-mode
-                              'inf-ruby
-                              'latex-pretty-symbols
-                              ;; 'mac-key-mode
-                              'magit
-                              'markdown-mode
-                              'maxframe
-                              'multiple-cursors
-                              'pandoc-mode
-                              'polymode
-                              'pos-tip
-                              'powerline
-                              'python-mode
-                              'ipython
-                              'jedi
-                              'redo+
-                              ;; 'ruby-mode
-                              'smartparens 
-                              'smex
-                              'solarized-theme
-                              'tango-2-theme
-                              'textmate
-                              'typopunct
-                              'visual-regexp
-                              'yaml-mode
-                              'yasnippet
-                              'zenburn-theme
-                              'auctex
-                              'ess
-                              'r-autoyas                                
-                              'bbdb
-                              'graphviz-dot-mode
-                              'lua-mode
-                              )
-  "Libraries that should be installed by default.")
-=======
   (defvar starter-kit-packages (list 
                                 'adaptive-wrap  
                                 'ag
@@ -93,6 +30,7 @@ The following packages will be downloaded and installed.
                                 'expand-region
                                 'flycheck
                                 'flx-ido
+                                'gruvbox-theme
                                 'idle-highlight-mode
                                 'latex-pretty-symbols
                                 'magit
@@ -119,7 +57,6 @@ The following packages will be downloaded and installed.
                                 'r-autoyas                                
                                 )
     "Libraries that should be installed by default.")
->>>>>>> upstream/master
 #+end_src
 
 #+begin_src emacs-lisp
